@@ -1,0 +1,10 @@
+
+{% extends "base_dashboard.html" %}
+{% block content %}
+<h2>Excluir Categoria</h2>
+<p>Tem certeza que deseja excluir <strong>{{ object.name }}</strong>?</p>
+<form method="post">{% csrf_token %}
+  <button class="btn btn-danger">Sim, excluir</button>
+  <a href="{% url 'category-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

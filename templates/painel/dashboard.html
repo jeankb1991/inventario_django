@@ -1,0 +1,27 @@
+
+{% extends "base_dashboard.html" %}
+{% block extra_head %}<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>{% endblock %}
+{% block content %}
+<h2>📊 Painel</h2>
+<div class="row">
+  <div class="col-md-3"><div class="card p-3 text-center shadow"><h2>{{ total_itens }}</h2><p>Itens</p></div></div>
+  <div class="col-md-3"><div class="card p-3 text-center shadow"><h2>{{ total_categorias }}</h2><p>Categorias</p></div></div>
+  <div class="col-md-3"><div class="card p-3 text-center shadow"><h2>{{ total_estoque }}</h2><p>Total Estoque</p></div></div>
+  <div class="col-md-3"><div class="card p-3 text-center shadow"><h2>{{ total_alertas }}</h2><p>Alertas</p></div></div>
+</div>
+<div class="card mt-4 p-4 shadow">
+  <h4>Distribuição por Categoria</h4>
+  <canvas id="graficoEstoque"></canvas>
+</div>
+<script>
+const ctx = document.getElementById('graficoEstoque').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: {{ nomes_categorias|safe }},
+    datasets: [{ label: 'Quantidade', data: {{ quantidades_categorias|safe }}, backgroundColor:'#2563eb88', borderColor:'#2563eb', borderWidth:1 }]
+  },
+  options: { responsive:true }
+});
+</script>
+{% endblock %}

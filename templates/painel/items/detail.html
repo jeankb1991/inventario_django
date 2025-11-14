@@ -1,0 +1,11 @@
+
+{% extends "base_dashboard.html" %}
+{% block content %}
+<h2>{{ item.name }}</h2>
+<p><strong>Categoria:</strong> {{ item.category.name if item.category else '' }}</p>
+<p><strong>Quantidade:</strong> {{ item.quantity }}</p>
+<p>{{ item.description }}</p>
+{% if item.image %}<img src="{{ item.image.url }}" style="max-width:300px;">{% endif %}
+<a href="{% url 'item-edit' item.id %}" class="btn btn-warning">Editar</a>
+<a href="{% url 'item-list' %}" class="btn btn-secondary">Voltar</a>
+{% endblock %}

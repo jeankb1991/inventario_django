@@ -1,0 +1,38 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Painel{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background:#f4f6f9; }
+    .sidebar { width:250px;height:100vh;position:fixed;left:0;top:0;background:#2d3436;color:white;padding-top:20px; }
+    .sidebar a { display:block;padding:12px 20px;color:#dfe6e9;text-decoration:none; }
+    .sidebar a:hover { background:#636e72; }
+    .topbar { margin-left:250px;height:60px;background:#0984e3;color:white;display:flex;align-items:center;justify-content:space-between;padding:0 20px; }
+    .content { margin-left:250px;padding:30px;margin-top:20px; }
+  </style>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <div class="sidebar">
+    <h4 class="text-center mb-4">📦 Inventário</h4>
+    <a href="{% url 'painel' %}"><i class="fa fa-chart-line"></i> Dashboard</a>
+    <a href="{% url 'item-list' %}"><i class="fa fa-boxes"></i> Itens</a>
+    <a href="{% url 'category-list' %}"><i class="fa fa-tags"></i> Categorias</a>
+    <a href="{% url 'items-pdf' %}"><i class="fa fa-file-pdf"></i> Relatório PDF</a>
+    <a href="/admin/"><i class="fa fa-gear"></i> Administração</a>
+  </div>
+  <div class="topbar">
+    <div><i class="fa fa-bars"></i></div>
+    <div><strong>{% if request.user.is_authenticated %}{{ request.user.username }}{% else %}Visitante{% endif %}</strong></div>
+  </div>
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

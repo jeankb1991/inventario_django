@@ -1,0 +1,10 @@
+
+{% extends "base_dashboard.html" %}
+{% block content %}
+<h2>{% if object %}Editar{% else %}Nova{% endif %} Categoria</h2>
+<form method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn btn-success">Salvar</button>
+  <a href="{% url 'category-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
